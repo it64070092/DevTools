@@ -5,8 +5,6 @@ pipeline {
         // Define variables
         DOCKER_IMAGE       = 'tuchsanai/fastapi-webhook:latest'
         DOCKER_CREDENTIALS = credentials('dockerhub')
-        DOCKER_CREDENTIALS_USR = 'it64070092'
-        DOCKER_CREDENTIALS_PSW = 'Ear1797777'
     }
 
     stages {
