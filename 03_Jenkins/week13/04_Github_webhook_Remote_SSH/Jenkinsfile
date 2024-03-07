@@ -3,9 +3,9 @@ pipeline {
 
     environment {
         // It's good practice to keep sensitive or specific data like Docker images, remote hosts, and credentials out of the script for security and flexibility.
-        DOCKER_IMAGE    = 'it64070092/fastapi-webhook:latest' // Ensure this Docker image name is correct and accessible.
+        DOCKER_IMAGE    = 'it64070092/fastapi-webhooks:latest' // Ensure this Docker image name is correct and accessible.
         REMOTE_HOST     = 'it64070092@34.125.184.47' // Replace with your actual username and remote IP.
-        SSH_CREDENTIALS = 'ssh_prod_instance' // Use the ID of the Jenkins stored SSH credentials.
+        SSH_CREDENTIALS = '2633b165-ba87-4eeb-8660-cab5753f1763' // Use the ID of the Jenkins stored SSH credentials.
     }
 
     stages {
@@ -27,7 +27,7 @@ pipeline {
                     sh "ssh -o StrictHostKeyChecking=no $REMOTE_HOST 'docker stop \$(docker ps -a -q) || true'"
                     sh "ssh -o StrictHostKeyChecking=no $REMOTE_HOST 'docker rm \$(docker ps -a -q) || true'"
                     sh "ssh -o StrictHostKeyChecking=no $REMOTE_HOST 'docker rmi \$(docker images -q) || true'"
-                    sh "ssh -o StrictHostKeyChecking=no $REMOTE_HOST 'docker run -d --name fastapi-webhook -p 8085:80 $DOCKER_IMAGE'"
+                    sh "ssh -o StrictHostKeyChecking=no $REMOTE_HOST 'docker run -d --name fastapi-webhooks -p 8085:80 $DOCKER_IMAGE'"
                     sh "ssh -o StrictHostKeyChecking=no $REMOTE_HOST 'docker ps -a'"
                 }
             }
